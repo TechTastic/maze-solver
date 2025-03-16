@@ -148,9 +148,9 @@ class Maze:
                 has_wall = self._cells[i][j].has_bottom_wall
             
             if not has_wall and not self._cells[x][y].visited:
-                self._cells[i][j].draw_move(self._cells[x][y], self.path_color, self.undo_color)
+                self._cells[i][j].draw_move(self._cells[x][y], path_color=self.path_color, undo_color=self.undo_color)
                 if self._solve_r(x, y):
                     return True
-                self._cells[i][j].draw_move(self._cells[x][y], undo=True)
+                self._cells[i][j].draw_move(self._cells[x][y], undo=True, path_color=self.path_color, undo_color=self.undo_color)
         
         return False

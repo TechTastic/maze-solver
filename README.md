@@ -8,3 +8,6 @@
 - [ ] Potential Race against the algorithm
 - [ ] 3D
 - [ ] Algorithm vs Algorithm
+
+# My Own Suggestions
+- [ ] Export to TXT, MAZ, XML, and SVG
