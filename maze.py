@@ -10,7 +10,7 @@ class Algorithm(Enum):
     ASTAR = "a*"
 
 class Maze:
-    def __init__(self, x1, y1, num_rows, num_cols, cell_size_x, cell_size_y, win=None, seed=None, wall_color="black", path_color="red", undo_color="gray", animation_speed=0.05, start_x=0, start_y=0, end_x=None, end_y=None, algorithm=Algorithm.DFS):
+    def __init__(self, x1, y1, num_rows, num_cols, cell_size_x, cell_size_y, win=None, seed=None, wall_color="black", path_color="red", undo_color="gray", animation_speed=0.05, start_x=0, start_y=0, end_x=None, end_y=None):
         self.x1 = x1
         self.y1 = y1
         self.num_rows = num_rows
@@ -44,6 +44,7 @@ class Maze:
         if seed:
             log_maze_gen_start += f"with seed {self.seed}"
         print(log_maze_gen_start + f" and {animation_speed} animation speed...")
+        
         self._create_cells()
         self._validate_start_and_end()
         self._break_entrance_and_exit()
@@ -162,8 +163,8 @@ class Maze:
             for cell in row:
                 cell.visited = False
     
-    def solve(self):
-        match self.algorithm:
+    def solve(self, algorithm=Algorithm.DFS):
+        match algorithm:
             case Algorithm.DFS:
                 return self._solve_dfs_r(self.start_x, self.start_y, self.end_x, self.end_y)
             case _:

@@ -20,7 +20,7 @@ parser.add_argument("--start-position-x", type=int, default=0, help="sets the st
 parser.add_argument("--start-position-y", type=int, default=0, help="sets the starting y position for the maze, has to be on the edge")
 parser.add_argument("--end-position-x", type=int, default=None, help="sets the ending x position for the maze, has to be on the edge")
 parser.add_argument("--end-position-y", type=int, default=None, help="sets the ending y position for the maze, has to be on the edge")
-parser.add_argument("--algorithm", type=Algorithm, default=Algorithm.DFS, help="")
+parser.add_argument("--algorithm", type=Algorithm, default=Algorithm.DFS, help="sets the algorithm used to solve the maze, default value is dfs")
 
 def main():
     args = parser.parse_args()
@@ -49,9 +49,9 @@ def main():
         sys.setrecursionlimit(max_recursion_level)
 
     win = Window(800, 600, bg_color)
-    maze = Maze(margin, margin, rows, columns, cell_size, cell_size, win, seed, wall_color, path_color, undo_color, animation_speed, start_x, start_y, end_x, end_y, algorithm)
+    maze = Maze(margin, margin, rows, columns, cell_size, cell_size, win, seed, wall_color, path_color, undo_color, animation_speed, start_x, start_y, end_x, end_y)
     print("Solving...")
-    maze.solve()
+    maze.solve(algorithm)
     print("Solved!")
 
     win.wait_for_close()
