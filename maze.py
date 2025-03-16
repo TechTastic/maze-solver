@@ -35,8 +35,6 @@ class Maze:
         self.end_y = end_y
         if self.end_y is None:
             self.end_y = self.num_rows - 1
-        
-        self.algorithm = algorithm
 
         self._cells = []
 
@@ -204,5 +202,6 @@ class Maze:
                 if self._solve_dfs_r(x, y, end_x, end_y):
                     return True
                 self._cells[i][j].draw_move(self._cells[x][y], undo=True, path_color=self.path_color, undo_color=self.undo_color)
+                self._animate()
         
         return False
