@@ -4,7 +4,7 @@ import random
 from cell import Cell
 
 class Maze:
-    def __init__(self, x1, y1, num_rows, num_cols, cell_size_x, cell_size_y, win=None, seed=None):
+    def __init__(self, x1, y1, num_rows, num_cols, cell_size_x, cell_size_y, win=None, seed=None, wall_color="black", path_color="red", undo_color="gray"):
         self.x1 = x1
         self.y1 = y1
         self.num_rows = num_rows
@@ -14,11 +14,20 @@ class Maze:
         self.win = win
         if seed != None:
             random.seed(seed)
+        
+        self.wall_color = wall_color
+        self.path_color = path_color
+        self.undo_color = undo_color
 
         self._cells = []
 
+        log_maze_gen_start = f"Generating {self.num_cols}x{self.num_rows} Maze of {self.cell_size_x}x{self.cell_size_y} cells with a margin of {x1}, {y1}"
+        if seed:
+            log_maze_gen_start += f"with seed {self.seed}"
+        print(log_maze_gen_start + "...")
         self._create_cells()
         self._break_entrance_and_exit()
+        print("Randomizing Walls...")
         self._break_walls_r(0, 0)
         self._reset_cells_visited()
     
@@ -43,7 +52,10 @@ class Maze:
         cell_x2 = cell_x1 + self.cell_size_x
         cell_y2 = cell_y1 + self.cell_size_y
 
-        self._cells[i][j].draw(cell_x1, cell_y1, cell_x2, cell_y2)
+        if self.win:
+            self._cells[i][j].draw(cell_x1, cell_y1, cell_x2, cell_y2, self.wall_color, self.win.bg_color)
+        else:
+            self._cells[i][j].draw(cell_x1, cell_y1, cell_x2, cell_y2, self.wall_color)
         self._animate()
     
     def _animate(self):
@@ -136,7 +148,7 @@ class Maze:
                 has_wall = self._cells[i][j].has_bottom_wall
             
             if not has_wall and not self._cells[x][y].visited:
-                self._cells[i][j].draw_move(self._cells[x][y])
+                self._cells[i][j].draw_move(self._cells[x][y], self.path_color, self.undo_color)
                 if self._solve_r(x, y):
                     return True
                 self._cells[i][j].draw_move(self._cells[x][y], undo=True)

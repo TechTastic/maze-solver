@@ -1,9 +1,9 @@
 # Suggested Improvements
 - [ ] Add other solving algorithms
-- [ ] Make visuals nicer, change colors, etc
+- [X] Make visuals nicer, change colors, etc
 - [ ] Mess with animation speeds
-- [ ] Add config options (size, speed, etc)
-- [ ] Make larger mazes
+- [X] Add config options (size, speed, etc)
+- [X] Make larger mazes
 - [ ] Player chooses directions
 - [ ] Potential Race against the algorithm
 - [ ] 3D
