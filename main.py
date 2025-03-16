@@ -14,10 +14,8 @@ def main():
     #cell2.draw(400, 400, 600, 600)
     #cell.draw_move(cell2, undo=True)
 
-    maze = Maze(100, 100, 10, 10, 10, 10, win)
-    maze._break_entrance_and_exit()
-    maze._break_walls_r(9, 1)
-    maze._reset_cells_visited()
+    maze = Maze(25, 25, 25, 35, 20, 20, win)
+    maze.solve()
 
     win.wait_for_close()
 
